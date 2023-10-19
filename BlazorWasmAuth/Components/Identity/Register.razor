@@ -21,24 +21,33 @@
                     <div class="alert alert-danger">@error</div>
                 }
             }
-            <div>
-                <label for="email">
-                    Email:
+            <div class="flex-outer">
+                
+                <div>
+                    <label for="email">
+                        Email:
+                    </label>
                     <input autofocus autocomplete="on" required id="email" name="emailInput" placeholder="Enter your email address" type="email" @bind-value="email" />
-                </label>
-            </div>
+                </div>
 
-            <div>
-                <label for="password">
-                    Password:
-                    <input required id="password" name="passwordInput" placeholder="Enter your password" type="password" @bind-value="password" />
-                </label><br/>
-                <label for="confirmPassword">
-                    Retype password:
+                <div>
+                    <label for="password">
+                        Password:
+                    </label>
+                    <input required id="password" name="passwordInput" placeholder="Enter your password" type="password" @bind-value="password" /><br />
+                </div>
+
+                <div>
+                    <label for="confirmPassword">
+                        Retype password:
+                    </label>
                     <input required id="confirmPassword" name="confirmPasswordInput" placeholder="Re-enter your password" type="password" @bind-value="confirmPassword" />
-                </label>
+                </div>
+
+                <div>
+                    <button @onclick="DoRegisterAsync">Register</button>
+                </div>
             </div>
-            <button @onclick="DoRegisterAsync">Register</button>
         }
     </NotAuthorized>
 </AuthorizeView>

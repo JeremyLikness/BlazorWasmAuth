@@ -26,6 +26,11 @@ namespace BlazorWasmAuth.Identity
         private readonly HttpClient _httpClient;
 
         /// <summary>
+        /// Authentication state.
+        /// </summary>
+        private bool _authenticated = false;
+
+        /// <summary>
         /// Default principal for anonymous (not authenticated) users.
         /// </summary>
         private readonly ClaimsPrincipal Unauthenticated = 
@@ -150,6 +155,8 @@ namespace BlazorWasmAuth.Identity
         /// <returns>The authentication state asynchronous request.</returns>
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
+            _authenticated = false;
+
             // default to not authenticated
             var user = Unauthenticated;
 
@@ -181,12 +188,25 @@ namespace BlazorWasmAuth.Identity
                     // set the principal
                     var id = new ClaimsIdentity(claims, nameof(CookieAuthenticationStateProvider));
                     user = new ClaimsPrincipal(id);
+                    _authenticated = true;
                 }
             }
             catch { }
 
             // return the state
             return new AuthenticationState(user);
-        }        
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _httpClient.PostAsync("Logout", null);
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+        }
+
+        public async Task<bool> CheckAuthenticatedAsync()
+        {
+            await GetAuthenticationStateAsync();
+            return _authenticated;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@page "/login"
 @using BlazorWasmAuth.Identity
-@inject IAccountManagement Acct 
+@inject IAccountManagement Acct
 
 <AuthorizeView>
     <Authorized>
@@ -10,19 +10,29 @@
         <h1>Login</h1>
         @if (errors)
         {
-            foreach(var error in errorList)
+            @foreach (var error in errorList)
             {
                 <div class="alert alert-danger">@error</div>
             }
         }
-        <label for="email">Email:
-            <input required id="email" name="emailInput" placeholder="Enter your email address" type="email" @bind-value="email"/>
-        </label>
-        <label for="password">
-            Password:
-            <input required id="password" name="passwordInput" placeholder="Enter your password" type="password" @bind-value="password" />
-        </label>        
-        <button @onclick="DoLoginAsync">Login</button>        
+        <div class="flex-outer">
+            <div>
+                <label for="email">
+                    Email:
+                </label>
+                <input required id="email" name="emailInput" placeholder="Enter your email address" type="email" @bind-value="email" />
+            </div>
+
+            <div>
+                <label for="password">
+                    Password:
+                </label>
+                <input required id="password" name="passwordInput" placeholder="Enter your password" type="password" @bind-value="password" />
+            </div>
+            <div>
+                <button @onclick="DoLoginAsync">Login</button>
+            </div>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
 

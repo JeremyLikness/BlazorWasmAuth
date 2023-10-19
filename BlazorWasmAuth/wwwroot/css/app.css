@@ -101,3 +101,53 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+label {
+    font-weight: bold;
+    color: darkblue;    
+    margin: 3px;
+}
+
+input {
+    margin: 3px;
+}
+
+.flex-outer div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.flex-outer div label,
+.flex-outer div input {
+    flex: 1 0 120px;
+    max-width: 220px;
+}
+
+.flex-outer div label + * {
+    flex: 1 0 120px;
+}
+
+.flex-outer > div > button {
+    margin: 1em;
+    padding: 8px 16px;
+    border: none;
+    background: lightblue;
+    color: purple;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border-radius: 2px;
+}
+
+.flex-outer > div > button:hover {
+    margin: 1em;
+    padding: 8px 16px;
+    border: solid 1px darkgreen;
+    background: white;
+    color: purple;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border-radius: 2px;
+}

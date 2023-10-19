@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,14 @@ var app = builder.Build();
 
 // create routes for the identity endpoints
 app.MapIdentityApi<MyUser>();
+
+app.MapPost("/Logout", async (
+           ClaimsPrincipal user,
+           SignInManager<MyUser> signInManager) =>
+{
+    await signInManager.SignOutAsync();
+    return TypedResults.Ok();
+});
 
 // activate the CORS policy
 app.UseCors("wasm");
